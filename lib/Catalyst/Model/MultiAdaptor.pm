@@ -46,6 +46,7 @@ Given a good old perl class like:
 
 
 Wrap them with a Catalyst Model.
+The package parameter is base package for plain old perl classes.
 
   use Catalyst::Model::MultiAdaptor;
 
@@ -63,6 +64,16 @@ Wrap them with a Catalyst Model.
   );
 
   1;
+
+
+Then you can use Wrapped models like below:
+
+  sub action: Whatever {
+    my ($self, $c) = @_;
+    my $someclass = $c->model('Service::SomeClass');
+    $someclass->method; #yay
+  }
+
 
 Note that C<MyApp::Service::SomeClass> is instantiated at application
 statup time.
