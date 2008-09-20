@@ -30,6 +30,7 @@ $mech->content_like(qr/it works/i, 'see if it has our text');
                         'adapted class is itself');
 }
 
+# logic and lifecycle
 {
     $mech->get_ok('http://localhost/multiadaptor/counter', 'get count');
     my $a = $mech->content;
@@ -39,6 +40,7 @@ $mech->content_like(qr/it works/i, 'see if it has our text');
     is $b, $a+1, 'same instance across requests';
 }
 
+# config
 {
     $mech->get_ok('http://localhost/multiadaptor/id', 'get id');
     is $mech->content, 1, 'got id is expected one';
