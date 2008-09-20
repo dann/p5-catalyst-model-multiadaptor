@@ -69,9 +69,15 @@ The package parameter is base package for plain old perl classes.
 Then you can use Wrapped models like below:
 
   sub action: Whatever {
-    my ($self, $c) = @_;
-    my $someclass = $c->model('Service::SomeClass');
-    $someclass->method; #yay
+      my ($self, $c) = @_;
+      my $someclass = $c->model('Service::SomeClass');
+      $someclass->method; #yay
+  }
+
+  sub another_action: Whatever {
+      my ($self, $c) = @_;
+      my $anotherclass = $c->model('Service::AnotherClass');
+      $anotherclass->method; #yay
   }
 
 
