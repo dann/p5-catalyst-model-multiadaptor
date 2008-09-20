@@ -4,8 +4,35 @@ use warnings;
 
 =head1 NAME
 
-Catalyst::Helper::Model::MultiAdaptor - helper for 
-Catalyst::Model::MultiAdaptor
+Catalyst::Helper::Model::MultiAdaptor - helper for the incredibly lazy 
+
+=head1 SYNOPSIS
+
+Running:
+
+    catalyst.pl model SomeClass MultiAdaptor MyApp::Service 
+
+Will create C<MyApp::Model::SomeClass> that looks like:
+
+    package MyApp::Model::SomeClass;
+    use strict;
+    use warnings;
+    use base 'Catalyst::Model::MultiAdaptor';
+    
+    __PACKAGE__->config( 
+        package       => 'MyApp::Service',
+    );
+
+    1;
+
+Why you need a script to generate that is beyond me, but here it is.
+
+=head1 ARGUMENTS
+
+   catalyst.pl model <model_name> MultiAdaptor <package>
+
+You need to sepecify the C<model_name> (the name of the model), and
+C<package>, the base package for plain old perl models.
 
 =cut
 
