@@ -4,7 +4,8 @@ use warnings;
 
 =head1 NAME
 
-Catalyst::Helper::Model::Adaptor - helper for the incredibly lazy
+Catalyst::Helper::Model::MultiAdaptor - helper for 
+Catalyst::Model::MultiAdaptor
 
 =cut
 
