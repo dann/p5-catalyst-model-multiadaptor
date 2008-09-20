@@ -15,6 +15,7 @@ sub load_services {
     my $finder
         = Module::Pluggable::Object->new( search_path => $base_package );
     for my $service ( $finder->plugins ) {
+        $self->_load_class($service);
         $self->_install_service_as_model($service);
     }
 
@@ -22,8 +23,7 @@ sub load_services {
 
 sub _install_service_as_model {
     my ( $self, $service ) = @_;
-    my $classname
-        = $self->_convert2classname( $service, $self->{base_package} );
+    my $classname = $self->_convert2classname( $service, $self->{package} );
     my $instance = $self->_create_instance($service);
 
     Sub::Install::install_sub(
@@ -42,9 +42,13 @@ sub _convert2classname {
     return "${class}::$short_service_name";
 }
 
-sub _create_instance {
+sub _load_class {
     my ( $self, $adapted_class ) = @_;
     Class::MOP::load_class($adapted_class);
+}
+
+sub _create_instance {
+    my ( $self, $adapted_class ) = @_;
     return $adapted_class->new();
 }
 

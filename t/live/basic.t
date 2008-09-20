@@ -11,7 +11,7 @@ BEGIN {
     plan skip_all => 'this test needs Test::WWW::Mechanize::Catalyst'
       unless eval "require Test::WWW::Mechanize::Catalyst";
 
-    plan tests => 5;
+    plan tests => 8;
 }
 
 # make sure testapp works
@@ -28,5 +28,14 @@ $mech->content_like(qr/it works/i, 'see if it has our text');
     $mech->get_ok('http://localhost:3000/multiadaptor/isa', 'get the class name');
     $mech->content_like(qr/^TestApp::Service::SomeClass$/,
                         'adapted class is itself');
+}
+
+{
+    $mech->get_ok('http://localhost/multiadaptor/counter', 'get count');
+    my $a = $mech->content;
+    $mech->get_ok('http://localhost/multiadaptor/counter', 'get count (+1)');
+    my $b = $mech->content;
+
+    is $b, $a+1, 'same instance across requests';
 }
 

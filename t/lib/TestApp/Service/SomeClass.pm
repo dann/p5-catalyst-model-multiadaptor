@@ -1,5 +1,6 @@
 package TestApp::Service::SomeClass;
 use Moose;
+use Carp;
 
 has 'count' => (
     is      => 'rw',
@@ -13,9 +14,10 @@ has 'id' => ( is => 'rw', );
 
 no Moose;
 
-sub count {
+sub counter {
     my $self = shift;
-    return $self->count = $self->{count} + 1;
+    $self->count($self->count + 1);
+    return $self->count;
 }
 
 sub id {

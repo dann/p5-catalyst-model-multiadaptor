@@ -27,7 +27,7 @@ Catalyst::Model::MultiAdaptor -
 
 =head1 DESCRIPTION
 
-Catalyst::Model::Loader is
+Catalyst::Model::MultiAdaptor is
 
 =head1 AUTHOR
 

@@ -10,6 +10,11 @@ sub is_a :Path(isa) {
     $c->res->body(ref $c->model($self->model));
 }
 
+sub counter : Local {
+    my ($self, $c) = @_;
+    $c->res->body($c->model($self->model)->counter);
+}
+
 sub id :Local {
     my ($self, $c) = @_;
     $c->res->body($c->model($self->model)->id);
