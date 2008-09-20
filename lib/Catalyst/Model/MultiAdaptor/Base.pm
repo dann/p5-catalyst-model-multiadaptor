@@ -12,34 +12,52 @@ use base 'Catalyst::Model';
 sub load_services {
     my $self         = shift;
     my $base_package = $self->{package};
+    croak 'package parameter must be set.' unless $base_package;
     my $finder
         = Module::Pluggable::Object->new( search_path => $base_package );
     for my $service ( $finder->plugins ) {
         $self->_load_class($service);
-        $self->_install_service_as_model($service);
+        my $config = $self->_service_config($service);
+        $self->_install_service_as_model( $service, $config );
     }
 
 }
 
 sub _install_service_as_model {
-    my ( $self, $service ) = @_;
-    my $classname = $self->_convert2classname( $service, $self->{package} );
-    my $instance = $self->_create_instance($service);
+    my ( $self, $service, $config ) = @_;
+    my $model_class_name
+        = $self->_convert2modelname( $service, $self->{package} );
+    my $instance = $self->_create_instance( $service, $config );
 
     Sub::Install::install_sub(
         {   code => sub { return $instance },
-            into => $classname,
+            into => $model_class_name,
             as   => 'ACCEPT_CONTEXT',
         }
     );
 }
 
-sub _convert2classname {
-    my ( $self, $service, $base_class ) = @_;
-    my $class              = ref($self);
-    my $short_service_name = $service;
-    $short_service_name =~ s/^$base_class\:\://g;
+sub _service_config {
+    my ( $self, $service ) = @_;
+    my $short_service_name
+        = $self->_short_service_name( $service, $self->{package} );
+    my $config = $self->{config} || {};
+    return $config->{$short_service_name} || {};
+}
+
+sub _convert2modelname {
+    my ( $self, $service, $base_package ) = @_;
+    my $class = ref($self);
+    my $short_service_name
+        = $self->_short_service_name( $service, $base_package );
     return "${class}::$short_service_name";
+}
+
+sub _short_service_name {
+    my ( $self, $service, $base_package ) = @_;
+    my $short_service_name = $service;
+    $short_service_name =~ s/^$base_package\:\://g;
+    return $short_service_name;
 }
 
 sub _load_class {
@@ -48,8 +66,8 @@ sub _load_class {
 }
 
 sub _create_instance {
-    my ( $self, $adapted_class ) = @_;
-    return $adapted_class->new();
+    my ( $self, $adapted_class, $config ) = @_;
+    return $adapted_class->new( %{$config} );
 }
 
 1;

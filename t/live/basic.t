@@ -11,7 +11,7 @@ BEGIN {
     plan skip_all => 'this test needs Test::WWW::Mechanize::Catalyst'
       unless eval "require Test::WWW::Mechanize::Catalyst";
 
-    plan tests => 8;
+    plan tests => 10;
 }
 
 # make sure testapp works
@@ -39,3 +39,7 @@ $mech->content_like(qr/it works/i, 'see if it has our text');
     is $b, $a+1, 'same instance across requests';
 }
 
+{
+    $mech->get_ok('http://localhost/multiadaptor/id', 'get id');
+    is $mech->content, 1, 'got id is expected one';
+}

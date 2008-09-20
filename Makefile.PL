@@ -8,7 +8,6 @@ requires $_
     Sub::Install
     Class::MOP
     Class::C3
-    Catalyst::Model
     Module::Pluggable::Object
     /
     );
@@ -18,6 +17,10 @@ build_requires $_
     qw/
     Test::More
     Catalyst::Test
+    Test::WWW::Mechanize::Catalyst
+    Moose
+    Catalyst
+    Catalyst::Controller
     /
     );
 use_test_base;
