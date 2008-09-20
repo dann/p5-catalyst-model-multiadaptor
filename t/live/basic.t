@@ -5,12 +5,11 @@ use Test::More;
 
 # setup library path
 use FindBin qw($Bin);
-use lib "$Bin/lib";
+use lib "$Bin/../lib";
 
 BEGIN {
     plan skip_all => 'this test needs Test::WWW::Mechanize::Catalyst'
       unless eval "require Test::WWW::Mechanize::Catalyst";
-
     plan tests => 10;
 }
 
