@@ -23,8 +23,9 @@ sub load_services {
 sub _install_service_as_model {
     my ( $self, $service ) = @_;
     my $classname
-        = $self->_convert2classname( $service, $self->{base_class} );
+        = $self->_convert2classname( $service, $self->{base_package} );
     my $instance = $self->_create_instance($service);
+
     Sub::Install::install_sub(
         {   code => sub { return $instance },
             into => $classname,
