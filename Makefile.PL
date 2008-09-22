@@ -19,7 +19,6 @@ build_requires $_
     Test::More
     Catalyst::Test
     Test::WWW::Mechanize::Catalyst
-    Moose
     Catalyst
     Catalyst::Controller
     /
