@@ -54,6 +54,7 @@ The package parameter is base package for plain old perl classes.
   use base 'Catalyst::Model::MultiAdaptor';
   __PACKAGE__->config( 
       package => 'MyApp::Service',
+      lifycycle => 'Singleton',
       config => {
           'SomeClass' => {
               id => 1,
@@ -61,6 +62,7 @@ The package parameter is base package for plain old perl classes.
           'AnotherClass' => {
                 host => 'example',
           },
+      },
   );
 
   1;

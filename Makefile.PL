@@ -9,6 +9,7 @@ requires $_
     Class::MOP
     Class::C3
     Module::Pluggable::Object
+    Moose
     /
     );
 

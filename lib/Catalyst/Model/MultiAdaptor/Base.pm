@@ -6,6 +6,7 @@ use Class::C3;
 use Class::MOP;
 use Sub::Install;
 use Module::Pluggable::Object;
+use Catalyst::Model::MultiAdaptor::LifeCycle;
 
 use base 'Catalyst::Model';
 
@@ -27,12 +28,11 @@ sub _install_service_as_model {
     my ( $self, $service, $config ) = @_;
     my $model_class_name
         = $self->_convert2modelname( $service, $self->{package} );
-    my $instance = $self->_create_instance( $service, $config );
-
-    Sub::Install::install_sub(
-        {   code => sub { return $instance },
-            into => $model_class_name,
-            as   => 'ACCEPT_CONTEXT',
+    Catalyst::Model::MultiAdaptor::LifeCycle->setup(
+        {   adapted_class    => $service,
+            model_class_name => $model_class_name,
+            config           => $config,
+            policy           => $self->{lifecycle} || 'Singleton',
         }
     );
 }
