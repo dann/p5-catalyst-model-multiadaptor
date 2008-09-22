@@ -47,6 +47,11 @@ Given a good old perl class like:
 
 Wrap them with a Catalyst Model.
 The package parameter is base package for plain old perl classes.
+The lifecyce parameter is lifcycle for wrapped class instance.
+You can set lifecyle listed as below:
+  * Singleton  - create instance per applciation 
+  * PerRequest - create instance per request
+  * Prototype  - create instance per every time. 
 
   use Catalyst::Model::MultiAdaptor;
 
