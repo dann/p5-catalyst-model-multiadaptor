@@ -14,14 +14,22 @@ sub load_services {
     my $self         = shift;
     my $base_package = $self->{package};
     croak 'package parameter must be set.' unless $base_package;
-    my $finder
-        = Module::Pluggable::Object->new( search_path => $base_package );
+    my $finder = Module::Pluggable::Object->new(
+        search_path => $base_package,
+        except      => $self->_except_classes || []
+    );
     for my $service ( $finder->plugins ) {
         $self->_load_class($service);
         my $config = $self->_service_config($service);
         $self->_install_service_as_model( $service, $config );
     }
+}
 
+sub _except_classes {
+    my $self = shift;
+    my @except_classes
+        = map { $self->{package} . "::" . $_ } @{ $self->{except} };
+    \@except_classes;
 }
 
 sub _install_service_as_model {

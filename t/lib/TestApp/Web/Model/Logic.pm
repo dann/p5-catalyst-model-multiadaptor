@@ -1,10 +1,10 @@
-package TestApp::Web::Model::Service;
+package TestApp::Web::Model::Logic;
 use strict;
 use warnings;
 use base 'Catalyst::Model::MultiAdaptor';
 
 __PACKAGE__->config(
-    package   => 'TestApp::Service',
+    package   => 'TestApp::Logic',
     lifecycle => 'Singleton',
     config    => {
         'SomeClass' => {
@@ -13,8 +13,7 @@ __PACKAGE__->config(
         'AnotherClass' => {
             id => 2,
         }
-    },
-    except => ['ExceptClass'],
+    }
 );
 
 1;
