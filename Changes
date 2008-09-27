@@ -1,4 +1,7 @@
 Revision history for Perl extension Catalyst::Model::MultiAdaptor
 
+0.02 Sat Sep 28 01:28:03 2008
+	* changed from use base to use parent
+
 0.01 Sat Sep 20 11:28:27 2008
 	* original version

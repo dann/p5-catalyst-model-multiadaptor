@@ -10,6 +10,7 @@ requires $_
     Class::C3
     Module::Pluggable::Object
     Moose
+    parent
     /
     );
 
