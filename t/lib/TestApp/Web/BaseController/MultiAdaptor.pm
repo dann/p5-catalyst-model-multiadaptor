@@ -12,12 +12,12 @@ sub is_a :Path(isa) {
 
 sub counter : Local {
     my ($self, $c) = @_;
-    $c->res->body($c->model($self->model)->counter);
+    $c->res->body($c->model($self->model)->incr);
 }
 
-sub id :Local {
+sub uid :Local {
     my ($self, $c) = @_;
-    $c->res->body($c->model($self->model)->id);
+    $c->res->body($c->model($self->model)->uid);
 }
 
 1;

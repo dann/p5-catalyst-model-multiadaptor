@@ -7,7 +7,7 @@ requires $_
     qw/
     Sub::Install
     Class::MOP
-    Class::C3
+    MRO::Compat
     Module::Pluggable::Object
     Moose
     /

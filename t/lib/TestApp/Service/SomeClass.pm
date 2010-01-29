@@ -10,19 +10,14 @@ has 'count' => (
     }
 );
 
-has 'id' => ( is => 'rw', );
+has 'uid' => ( is => 'rw', );
 
 no Moose;
 
-sub counter {
+sub incr {
     my $self = shift;
     $self->count($self->count + 1);
     return $self->count;
-}
-
-sub id {
-    my $self = shift;
-    return $self->id;
 }
 
 __PACKAGE__->meta->make_immutable;

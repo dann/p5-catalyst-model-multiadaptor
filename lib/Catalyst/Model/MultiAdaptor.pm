@@ -1,9 +1,9 @@
 package Catalyst::Model::MultiAdaptor;
 use strict;
 use warnings;
-use Class::C3;
+use MRO::Compat;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 use base 'Catalyst::Model::MultiAdaptor::Base';
 
 sub new {

@@ -14,7 +14,7 @@ BEGIN {
 }
 
 # make sure testapp works
-use ok 'TestApp::Web';
+use_ok 'TestApp::Web';
 
 # a live test against TestApp, the test application
 use Test::WWW::Mechanize::Catalyst 'TestApp::Web';
@@ -41,6 +41,8 @@ $mech->content_like(qr/it works/i, 'see if it has our text');
 
 # config
 {
-    $mech->get_ok('http://localhost/multiadaptor/id', 'get id');
-    is $mech->content, 1, 'got id is expected one';
+    $mech->get_ok('http://localhost/multiadaptor/uid', 'get uid');
+    is $mech->content, 1, 'got uid is expected one';
 }
+
+done_testing;

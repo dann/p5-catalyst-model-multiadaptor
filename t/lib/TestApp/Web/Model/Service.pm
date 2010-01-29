@@ -8,10 +8,10 @@ __PACKAGE__->config(
     lifecycle => 'Singleton',
     config    => {
         'SomeClass' => {
-            id => 1,
+            uid => 1,
         },
         'AnotherClass' => {
-            id => 2,
+            uid => 2,
         }
     },
     except => ['ExceptClass'],
