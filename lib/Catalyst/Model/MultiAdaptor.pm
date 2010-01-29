@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use MRO::Compat;
 
-our $VERSION = '0.02';
+our $VERSION = '0.1';
 use base 'Catalyst::Model::MultiAdaptor::Base';
 
 sub new {

@@ -1,6 +1,6 @@
 Revision history for Perl extension Catalyst::Model::MultiAdaptor
 
-0.02 Fri Jan 29 23:28:27 2010
+0.1  Fri Jan 29 23:28:27 2010
         * Used MRO::Compat instead of Class::C3 
 
 0.01 Sat Sep 20 11:28:27 2008
