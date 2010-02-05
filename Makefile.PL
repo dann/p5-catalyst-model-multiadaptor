@@ -10,6 +10,7 @@ requires $_
     MRO::Compat
     Module::Pluggable::Object
     Moose
+    Class::C3 
     /
     );
 
